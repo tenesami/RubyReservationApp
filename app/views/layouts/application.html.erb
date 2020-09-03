@@ -8,6 +8,11 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+<!-- we use logout here b/c we need it to be accesseble every whare
+ logout is a mehtod of get doesn't help about the post so specifay  -->
+    <div>
+      <%= link_to "log out", logout_path, method: :delete %>
+    </div>
 
   <body>
     <%= yield %>
