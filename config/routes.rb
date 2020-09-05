@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  #send to root page
   root 'sessions#home'
 
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create' #help user to see signup if they don't signup correctly
+  #signup user
   get '/signup' => 'users#new'
-  post '/signup' => 'users#create'
+  post '/signup' => 'users#create' #help user to see signup if they don't signup correctly
+
+  #login user
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create' 
+
+  #logout user
   delete '/logout' => 'sessions#destroy'
 
   resources :restaurants
