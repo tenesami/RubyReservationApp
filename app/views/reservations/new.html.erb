@@ -1,0 +1,56 @@
+<h1> Make new reservation </h1>
+
+<%= form_for(@reservation)  do |f|%>
+
+<p> Select Restaurant that exits in the system </p>
+<div>
+    <%= f.collection_select :restaurant_id, Restaurant.all, :id, :restaurant_name, include_blank: 'Select One'%>
+   
+</div>
+
+<p> Or Create new Restaurant</p>
+<div>
+    <%= f.fields_for :Restaurant do |r|  %>
+
+    <%= r.label :restaurant_name %>
+    <%= r.text_field :restaurant_name %>
+    <% end %>
+</div>
+
+<br/>
+<div>
+    <%= f.label :number_of_tables %>
+    <%= f.text_field :number_of_tables %>
+</div>
+
+<br/>
+<div>
+    <%= f.label :checkin_date %>
+    <%= f.text_field :checkin_date %>
+</div>
+
+<br/>
+<div>
+    <%= f.label :checkin_time %>
+    <%= f.text_field :checkin_time %>
+</div>
+
+<br/>
+<div>
+    <%= f.label :checkout_time %>
+    <%= f.text_field :checkout_time %>
+</div>
+
+<br/>
+<div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+</div>
+
+<br/>
+
+<%= f.submit %>
+
+<% end %>
+
+ 
