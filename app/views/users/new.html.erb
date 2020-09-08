@@ -1,6 +1,6 @@
 <h1> Sign Up  </h1>
 
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, url: '/signup') do |f| %><!--b/c we specialy the url user can see the signup -->
 <p>
     <%= f.label :user_name %>
     <%= f.text_field :user_name %>
@@ -8,7 +8,7 @@
 
 <p>
     <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.email_field :email %> <!--the eamil_fild validate front end data -->
 </p>
     <%= f.label :password %>
     <%= f.password_field :password %>

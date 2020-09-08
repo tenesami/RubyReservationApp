@@ -2,7 +2,7 @@ Restaurant
     - has_many: reservations
 
     -restaurant_name :stirng
-    -is_avaliable_table :boolean
+    -avaliable_table :boolean
     -photo :string 
     
 

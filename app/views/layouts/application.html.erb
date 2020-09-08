@@ -11,7 +11,15 @@
 <!-- we use logout here b/c we need it to be accesseble every whare
  logout is a mehtod of get doesn't help about the post so specifay  -->
     <div>
-      <%= link_to "log out", logout_path, method: :delete %>
+    <% if logged_in?%>
+     
+      <%= link_to "Logout", logout_path, method:"delete"%> | 
+      <%= link_to "Make Reservation", new_reservation_path%>
+
+      <% else %>
+      <%=link_to "Sign Up", signup_path %> |
+      <%=link_to "Log In", login_path %>
+      <% end %>
     </div>
 
   <body>
