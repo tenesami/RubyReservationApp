@@ -16,6 +16,7 @@ class ReservationsController < ApplicationController
         end
     end
 
+    private 
     def reservation_params
         params.require(:reservation).permit(:number_of_tables, 
         :checkin_date, :checkin_time, :checkout_time, 
