@@ -1,0 +1,8 @@
+<h1> All the Restaurants </h1>
+
+<% @restaurants.each do |r| %>
+
+    <h3><%= link_to r.restaurant_name, r %>
+    <%= r.available_table%> </h3>
+    
+<% end %>
