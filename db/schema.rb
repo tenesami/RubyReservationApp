@@ -13,12 +13,8 @@
 ActiveRecord::Schema.define(version: 2020_09_03_052219) do
 
   create_table "reservations", force: :cascade do |t|
-    t.string "restaurant_name"
-    t.integer "number_of_tables"
-    t.datetime "checkin_date"
-    t.datetime "checkin_time"
-    t.datetime "checkout_time"
-    t.string "description"
+    t.integer "num_tables"
+    t.string "checkin_date"
     t.integer "restaurant_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -29,9 +25,11 @@ ActiveRecord::Schema.define(version: 2020_09_03_052219) do
 
   create_table "restaurants", force: :cascade do |t|
     t.string "restaurant_name"
-    t.boolean "avaliable_table"
+    t.boolean "available_table"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_restaurants_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -47,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_09_03_052219) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "user_name"
+    t.string "username"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
@@ -56,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_09_03_052219) do
 
   add_foreign_key "reservations", "restaurants"
   add_foreign_key "reservations", "users"
+  add_foreign_key "restaurants", "users"
   add_foreign_key "reviews", "reservations"
   add_foreign_key "reviews", "users"
 end

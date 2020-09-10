@@ -13,9 +13,15 @@ Rails.application.routes.draw do
   #logout user
   delete '/logout' => 'sessions#destroy'
 
-  resources :restaurants
-  resources :reviews
-  resources :reservations
-  resources :users
+  #creates a nested restaurant routes 
+  resources :restaurants  do
+    resources :reservations
+  end
+  resources :reservations 
+  #creates a nested user routes 
+  resources :users do
+    resources :restaurants, shallow: true
+  end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
