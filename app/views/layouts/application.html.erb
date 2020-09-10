@@ -14,7 +14,9 @@
     <% if logged_in?%>
      
       <%= link_to "Logout", logout_path, method:"delete"%> | 
-      <%= link_to "Make Reservation", new_reservation_path%>
+      <%= link_to "Add Restaurant", new_restaurant_path%> |
+      <%= link_to "All Restaurants", restaurants_path%> |
+      <%= link_to "Make Reservation", new_reservation_path%> |
 
       <% else %>
       <%=link_to "Sign Up", signup_path %> |
@@ -22,6 +24,14 @@
       <% end %>
     </div>
 
+  <div>
+  <% if flash[:message] %>
+          <%= flash[:message]%>
+
+      <% end %>
+      <%= @error%>
+  </div>
+  
   <body>
     <%= yield %>
   </body>
