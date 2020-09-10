@@ -1,0 +1,20 @@
+<h1> New restaurants </h1>
+<%= form_for(@restaurant)  do |f|%>
+
+<br/>
+    <div>
+        <%= f.label :restaurant_name %>
+        <%= f.text_field :restaurant_name %>
+    </div>
+<br/>
+
+<div>
+    <%= f.label :available_table %>
+    <%= f.text_field :available_table %>
+</div>
+
+<br/>
+
+<%= f.submit %>
+
+<% end %>
