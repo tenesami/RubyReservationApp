@@ -1,26 +1,35 @@
-<h1> Make new reservation </h1>
+<% if @reservation.restaurant %>
+<h1> Make new reservation for <%= @reservation.restaurant.restaurant_name %>!</h1>
+<% else %>
+<h1> New Reservation!</h1>
+<% end %>
 
-<%= form_for(@reservation)  do |f|%>
-
-<p> Select Restaurant that exits in the system </p>
-<div>
-    <%= f.collection_select :restaurant_id, Restaurant.all, :id, :restaurant_name, include_blank: 'Select One'%>
-   
-</div>
-
-<p> Or Create new Restaurant</p>
-<div>
-    <%= f.fields_for :Restaurant do |r|  %>
-
-    <%= r.label :restaurant_name %>
-    <%= r.text_field :restaurant_name %>
+<% if @reservation.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this article from being saved:</h2>
+ 
+    <ul>
+    <% @reservation.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
     <% end %>
-</div>
+    </ul>
+  </div>
+<% end %>
 
-<br/>
+<%= form_for([@reservation.restaurant, @reservation]) do |f|%>
+
+<% if !@reservation.restaurant %>
+  <%= f.label :restaurant %>
+  <%= f.collection_select :restaurant_id, Restaurant.all, :id, :restaurant_name %>
+<% else %>
+
+    <%= f.hidden_field :restaurant_id %>
+<% end %>
+
+<br />
 <div>
-    <%= f.label :number_of_tables %>
-    <%= f.text_field :number_of_tables %>
+    <%= f.label :num_tables %>
+    <%= f.text_field :num_tables %>
 </div>
 
 <br/>
@@ -30,27 +39,10 @@
 </div>
 
 <br/>
-<div>
-    <%= f.label :checkin_time %>
-    <%= f.text_field :checkin_time %>
-</div>
-
-<br/>
-<div>
-    <%= f.label :checkout_time %>
-    <%= f.text_field :checkout_time %>
-</div>
-
-<br/>
-<div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-</div>
-
-<br/>
 
 <%= f.submit %>
 
 <% end %>
 
- 
+
+
