@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   #logout user
   delete '/logout' => 'sessions#destroy'
 
+  #omniauth callback route
+get "/auth/:provider/callback" => 'sessions#google'
+#get 'auth/google_oauth2/callback', to: 'sessions#google'
+
   #creates a nested restaurant routes 
   resources :restaurants  do
     resources :reservations
