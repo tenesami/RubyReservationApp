@@ -11,10 +11,10 @@ class RestaurantsController < ApplicationController
 
     def index
         if params[:user_id] && @user = User.find_by_id(params[:user_id])
-            @restaurants = @user.restaurants
+            @restaurants = @user.restaurants.most_reservations
         else
             @error = "These user doesn't exitrs" if params[:user_id]
-            @restaurants = Restaurant.all
+            @restaurants = Restaurant.most_reservations
         end
     end
 
