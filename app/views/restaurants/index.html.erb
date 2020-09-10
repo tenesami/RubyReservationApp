@@ -2,7 +2,7 @@
 
 <% @restaurants.each do |r| %>
 
-    <h3><%= link_to r.restaurant_name, r %>
+    <h3><%= r.reservations.size %> - <%= link_to r.restaurant_name, r %>
     <%= r.available_table%> </h3>
     
 <% end %>
