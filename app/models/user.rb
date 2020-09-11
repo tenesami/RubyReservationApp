@@ -6,8 +6,6 @@ class User < ApplicationRecord
     #since active record take of the validation 
     #we don't need to validate twice 
     has_secure_password
-
     validates :username, uniqueness: true, presence: true
         
-
 end
