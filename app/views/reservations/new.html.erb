@@ -4,17 +4,7 @@
 <h1> New Reservation!</h1>
 <% end %>
 
-<% if @reservation.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this article from being saved:</h2>
- 
-    <ul>
-    <% @reservation.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render partial: "layouts/errors", locals: {object: @reservation} %>
 
 <%= form_for([@reservation.restaurant, @reservation]) do |f|%>
 
@@ -22,7 +12,6 @@
   <%= f.label :restaurant %>
   <%= f.collection_select :restaurant_id, Restaurant.all, :id, :restaurant_name %>
 <% else %>
-
     <%= f.hidden_field :restaurant_id %>
 <% end %>
 
