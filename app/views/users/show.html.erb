@@ -1,8 +1,7 @@
-welcome <%= @user.username %> successfully signup 
+Welcome <%= @user.username %> you are successfully login
 
-<!-- <%= form_tag("/logout", mehtod: "delete") do %>
-    <%= submit_tag "logout" %>
-    <% end %> -->
+<%= display_restaurants %>
 
+<%= render partial: "restaurants/restaurants", locals: {restaurants: @user.restaurants} %>
 
     
