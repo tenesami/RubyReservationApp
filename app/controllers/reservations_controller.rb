@@ -1,5 +1,7 @@
 class ReservationsController < ApplicationController
     before_action :redirect_if_not_logged_in
+    before_action :set_reservation, only: [:show, :edit, :update] 
+    before_action :redirect_if_not_reservation_author, only: [:edit, :update]
 
     def index
         #check the params to find the restaurant id and determine the route
@@ -36,15 +38,36 @@ class ReservationsController < ApplicationController
     end
 
     def show
-        @reservation = Reservation.find_by(params[:id])
+        #@reservation = Reservation.find_by(params[:id])
     end
 
     def edit
         #@reservations = Reservation.find_by(params[:id])
     end
 
+    def update
+        if @reservation.update(reservation_params)
+          redirect_to reservation_path(@reservation)
+        else
+          render :edit
+        end
+      end
+
+
         private 
         def reservation_params
             params.require(:reservation).permit(:num_tables, :checkin_date, :restaurant_id)
+        end
+
+        def set_reservation
+            @reservation = Reservation.find_by(id: params[:id])
+            if !@reservation
+                flash[:message] = "Reservation was not found"
+                redirect_to reservations_path
+            end
+        end
+        
+        def redirect_if_not_reservation_author
+            redirect_to reservations_path if @reservation.user != current_user
         end
 end
