@@ -1,8 +1,11 @@
-<h1> All the Restaurants </h1>
+<h1> My Restaurants </h1>
 
 <% @restaurants.each do |r| %>
+    <h3>Reserve: <%= link_to r.restaurant_name, r %> Restaurant,  Availablity ...  
+    <%= r.available_table%> </h3>  <%= r.reservations.size %> times reserved  
+<% end %>
+<br>
 
-    <h3><%= r.reservations.size %> - <%= link_to r.restaurant_name, r %>
-    <%= r.available_table%> </h3>
-    
+<% if @restaurants.blank? %>
+    <h2>No added restaurants yet. Add restaurants <%= link_to "here", new_restaurant_path%></h2>
 <% end %>
