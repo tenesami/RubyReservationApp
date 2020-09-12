@@ -8,15 +8,17 @@ class Restaurant < ApplicationRecord
     validate :too_many_restaurants
 
     scope :alpha, -> {order(:restaurant_name)} 
-    scope :most_reservations, -> { Restaurant.joins(:reservations).group('restaurants.id').order('count(restaurants.id) desc')}
+    scope :most_reservations, -> { Restaurant.left_joins(:reservations).group('restaurants.id').order('count(restaurants.id) desc')}
 
+      
     def too_many_restaurants
         #binding.pry
         today_restaurants = user.restaurants.select do |r|
             r.created_at.try(:to_date) == Date.today
         end
-        if today_restaurants.size > 2
-            errors.add(:restaurants_id, "can not be added more than 2 times per day")
+        
+        if today_restaurants.size > 5
+            errors.add(:restaurants_id, "can not be added more than 5 times per day")
         end
     end
 
