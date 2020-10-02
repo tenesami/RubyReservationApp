@@ -23,9 +23,14 @@
   <p><%= link_to 'See all Reservatons', restaurant_reservations_path(@restaurant)%></p>
   
   <h4>Most Recent Reservatons:</h4>
-  <% @restaurant.reservations.order(updated_at: :desc).limit(3).each do |n|%>
+  <% @restaurant.reservations.last_7_reserved.each do |n|%>
     <li>
-      <strong><%= n.user.username%></strong> reserves <%= link_to n.restaurant.restaurant_name, restaurant_reservation_path(@restaurant, n)%> at <%= n.updated_at.strftime("%I:%M %p on %m/%d/%Y") %>
+      <strong>
+      <%= n.user.username%>
+      </strong> reserves 
+      <%= link_to n.restaurant.restaurant_name, 
+      restaurant_reservation_path(@restaurant, n)%> 
+      at <%= n.updated_at.strftime("%I:%M %p on %m/%d/%Y") %>
     </li>
   <% end %>
 <% end %>
