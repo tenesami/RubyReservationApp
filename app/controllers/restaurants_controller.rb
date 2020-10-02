@@ -10,12 +10,18 @@ class RestaurantsController < ApplicationController
     end
 
     def index
+        
         if params[:user_id] && @user = User.find_by_id(params[:user_id])
-            @restaurants = @user.restaurants.alpha
+               
+            @restaurants = @user.restaurants.most_reservations
+            @restaurants = @user.restaurants.search(params[:q])
+            #binding.pry 
         else
-            @error = "These user doesn't exitrs" if params[:user_id]
-            @restaurants = Restaurant.alpha.includes(:user)
-        end
+            @error = "These user doesn't exist" if params[:user_id]
+                #@restaurants = Restaurant.most_reservations.includes(:user)
+                @restaurants = Restaurant.search(params[:q])
+            end
+       
     end
 
     def create
@@ -49,7 +55,7 @@ class RestaurantsController < ApplicationController
 
     private
     def restaurant_params
-        params.require(:restaurant).permit(:restaurant_name, :available_table)
+        params.require(:restaurant).permit(:restaurant_name, :available_table, :search)
     end
 
 end
