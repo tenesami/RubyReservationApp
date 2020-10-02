@@ -8,9 +8,21 @@ class Restaurant < ApplicationRecord
     validate :too_many_restaurants
 
     scope :alpha, -> {order(:restaurant_name)} 
-    scope :most_reservations, -> { Restaurant.left_joins(:reservations).group('restaurants.id').order('count(restaurants.id) desc')}
-
-      
+    
+    scope :most_reservations, -> { 
+        Restaurant.left_joins(:reservations)
+        .group('restaurants.id')
+        .order('count(restaurants.id) desc')
+    }
+    
+    def self.search(q)
+                if q
+                Restaurant.where("restaurant_name LIKE ?", "%#{q}%")
+            else
+                Restaurant.all
+           end
+    end
+    
     def too_many_restaurants
         #binding.pry
         today_restaurants = user.restaurants.select do |r|
