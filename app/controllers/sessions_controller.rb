@@ -47,12 +47,6 @@ class SessionsController < ApplicationController
         end
       end
 
-    # def google
-    #     u = User.find_or_create_with_oauth(auth)
-    #     session[:user_id] = u.id
-    
-    #     redirect_to '/'
-    #   end
     
       private
     
